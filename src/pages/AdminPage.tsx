@@ -17,6 +17,8 @@ import {
   Check,
   Download,
   RotateCcw,
+  Share2,
+  Copy,
 } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
 import { MenuItem } from '../types';
@@ -48,7 +50,7 @@ export const AdminPage: React.FC = () => {
   const [passcode, setPasscode] = useState('');
   const [loginError, setLoginError] = useState('');
   const [activeTab, setActiveTab] = useState<
-    'menu' | 'enquiries' | 'facilities' | 'gallery' | 'settings' | 'checklist'
+    'menu' | 'enquiries' | 'facilities' | 'gallery' | 'settings' | 'checklist' | 'social'
   >('menu');
 
   // Menu item modal state
@@ -260,6 +262,7 @@ export const AdminPage: React.FC = () => {
           { id: 'gallery', label: 'छायाचित्रे', icon: Image, count: gallery.length },
           { id: 'settings', label: 'संकेतस्थळ सेटिंग्ज', icon: Settings },
           { id: 'checklist', label: 'लॉन्च पडताळणी चेकलिस्ट', icon: CheckSquare, count: checklist.filter((c) => !c.is_completed).length },
+          { id: 'social', label: 'सोशल मीडिया कार्ड (OG Preview)', icon: Share2 },
         ].map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
@@ -1140,6 +1143,144 @@ export const AdminPage: React.FC = () => {
               <RotateCcw className="w-3.5 h-3.5" />
               डीफॉल्ट डेटा रीसेट करा
             </button>
+          </div>
+        </div>
+      )}
+      {/* TAB 7: SOCIAL MEDIA OG PREVIEW & SHARING TOOLKIT */}
+      {activeTab === 'social' && (
+        <div className="space-y-6">
+          <div className="bg-white rounded-2xl border border-[#EEDCC8] p-6 sm:p-8 space-y-6 shadow-xs">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF9933]/15 text-[#943C00] text-xs font-bold font-mr mb-2">
+                  🚩 अधिकृत सोशल मीडिया प्रिव्ह्यू कार्ड
+                </div>
+                <h2 className="font-serif-mr text-xl font-bold text-[#1C130D]">
+                  मराठी सोशल मीडिया ओपनग्राफ (OG) कार्ड
+                </h2>
+                <p className="text-xs text-[#57473D] mt-1">
+                  जेव्हा कोणीही आपल्या हॉटेलच्या संकेतस्थळाची लिंक WhatsApp, Facebook, Instagram, Twitter किंवा Telegram वर शेअर करेल, तेव्हा खालील आकर्षक मराठी कार्ड आपोआप दिसेल.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2">
+                <a
+                  href="/og-image.png"
+                  download="hotel-om-garden-social-og-image.png"
+                  className="px-4 py-2 rounded-xl bg-[#1C130D] hover:bg-[#2A1D14] text-[#FF9933] text-xs font-bold inline-flex items-center gap-2 transition-all shadow-xs"
+                >
+                  <Download className="w-4 h-4 text-[#FF9933]" />
+                  HD कार्ड डाउनलोड करा (1200x630)
+                </a>
+                <button
+                  onClick={() => {
+                    const shareText = `🚩 *हॉटेल ओम गार्डन — मांदळी (ता. कर्जत)* 🚩\nअहमदनगर–सोलापूर महामार्गावरील प्रसिद्ध फॅमिली रेस्टॉरंट!\n\n🍲 चविष्ट घरगुती जेवण (चिकन, मटण, भाकरी)\n👨‍👩‍👧‍👦 स्वतंत्र कौटुंबिक बैठक व्यवस्था\n🅿️ मोफत प्रशस्त कार पार्किंग\n🍷 स्वतंत्र परमिट रूम\n\n📞 संपर्क: +91 7744009199 / 9767294601\n🌐 संकेतस्थळ: ${window.location.origin}`;
+                    navigator.clipboard.writeText(shareText);
+                    alert('WhatsApp साठी तयार असलेला मेसेज कॉपी केला गेला आहे!');
+                  }}
+                  className="px-4 py-2 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold inline-flex items-center gap-2 transition-all shadow-xs"
+                >
+                  <Copy className="w-4 h-4" />
+                  WhatsApp मेसेज कॉपी करा
+                </button>
+              </div>
+            </div>
+
+            {/* High-Resolution Live OG Card Preview */}
+            <div className="space-y-2">
+              <span className="text-xs font-bold text-[#1C130D] uppercase tracking-wider">
+                पूर्ण आकाराचे अधिकृत कार्ड (1200 × 630 px)
+              </span>
+              <div className="relative rounded-2xl overflow-hidden border-2 border-[#FF9933]/40 shadow-lg bg-[#081713]">
+                <img
+                  src="/og-image.png"
+                  alt="हॉटेल ओम गार्डन सोशल मीडिया प्रिव्ह्यू कार्ड"
+                  className="w-full h-auto object-cover block"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+            </div>
+
+            {/* Platform Simulation Previews */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-[#EEDCC8]">
+              {/* WhatsApp Share Card Simulation */}
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 text-xs font-bold text-[#1C130D]">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#25D366]" />
+                  WhatsApp वर असे दिसेल (WhatsApp Share Preview):
+                </div>
+                <div className="bg-[#EFEAE2] p-4 rounded-xl border border-[#D1D7DB] max-w-md">
+                  <div className="bg-white rounded-lg overflow-hidden shadow-xs border border-[#E9EDEF]">
+                    <img
+                      src="/og-image.png"
+                      alt="WhatsApp Preview"
+                      className="w-full aspect-[1.91/1] object-cover"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="p-3 bg-[#F0F2F5]">
+                      <span className="text-[11px] uppercase tracking-wide text-[#667781] font-semibold block">
+                        HOTELOMGARDEN.IN
+                      </span>
+                      <h4 className="font-serif-mr font-bold text-sm text-[#111B21] line-clamp-1 mt-0.5">
+                        हॉटेल ओम गार्डन | फॅमिली रेस्टॉरंट | मांदळी, कर्जत
+                      </h4>
+                      <p className="text-xs text-[#667781] line-clamp-2 mt-0.5">
+                        अहमदनगर–सोलापूर महामार्ग, मांदळी येथील अस्सल महाराष्ट्रीयन जेवण, कौटुंबिक बैठक व्यवस्था व संपूर्ण मेनू पाहा.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mt-2 text-[11px] text-[#667781] text-right font-mono">
+                    12:45 PM ✓✓
+                  </div>
+                </div>
+              </div>
+
+              {/* Facebook / Twitter / LinkedIn Card Simulation */}
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 text-xs font-bold text-[#1C130D]">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#1877F2]" />
+                  Facebook / Twitter / Google वर असे दिसेल:
+                </div>
+                <div className="bg-white rounded-xl border border-[#CED0D4] overflow-hidden max-w-md shadow-xs">
+                  <img
+                    src="/og-image.png"
+                    alt="Facebook Card"
+                    className="w-full aspect-[1.91/1] object-cover"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="p-3 bg-[#F0F2F5] border-t border-[#CED0D4]">
+                    <span className="text-[10px] uppercase text-[#65676B] font-semibold tracking-wider">
+                      HOTELOMGARDEN.IN
+                    </span>
+                    <h4 className="font-serif-mr font-bold text-sm text-[#050505] line-clamp-1 mt-0.5">
+                      हॉटेल ओम गार्डन | फॅमिली रेस्टॉरंट | मांदळी, कर्जत
+                    </h4>
+                    <p className="text-xs text-[#65676B] line-clamp-2 mt-0.5">
+                      अहमदनगर–सोलापूर रोड, मांदळी येथील हॉटेल ओम गार्डनची माहिती, खाद्यपदार्थांची यादी, संपर्क क्रमांक आणि मार्गदर्शन पाहा.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Technical Verification Info */}
+            <div className="p-4 rounded-xl bg-[#FFF9F2] border border-[#EEDCC8] space-y-2">
+              <h4 className="text-xs font-bold text-[#1C130D] flex items-center gap-2">
+                <Check className="w-4 h-4 text-green-700" />
+                तांत्रिक खात्री (Technical Verification):
+              </h4>
+              <ul className="text-xs text-[#57473D] space-y-1 list-disc list-inside">
+                <li>
+                  <strong>ओपनग्राफ प्रतिमा (OG Image)</strong>: <code>/og-image.png</code> (१२०० × ६३० पिक्सेल, परिपूर्ण १.९१:१ गुणोत्तर).
+                </li>
+                <li>
+                  <strong>वेक्टर बॅकअप (Vector SVG)</strong>: <code>/og-image.svg</code> सर्व आधुनिक ब्राउझर्ससाठी उपलब्ध.
+                </li>
+                <li>
+                  <strong>HTML मेटा टॅग्ज</strong>: <code>index.html</code> मध्ये <code>og:image</code>, <code>og:image:width</code>, <code>twitter:card</code> आणि <code>twitter:image</code> अचूकपणे जोडले गेले आहेत.
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       )}
