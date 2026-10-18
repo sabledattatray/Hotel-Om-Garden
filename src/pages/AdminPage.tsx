@@ -19,6 +19,7 @@ import {
   RotateCcw,
   Share2,
   Copy,
+  ExternalLink,
 } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
 import { MenuItem } from '../types';
@@ -1334,35 +1335,55 @@ export const AdminPage: React.FC = () => {
 
               <div className="flex flex-wrap items-center gap-2">
                 <a
-                  href="/og-image.png"
-                  download="hotel-om-garden-social-og-image.png"
-                  className="px-4 py-2 rounded-xl bg-[#1C130D] hover:bg-[#2A1D14] text-[#FF9933] text-xs font-bold inline-flex items-center gap-2 transition-all shadow-xs"
+                  href="/og-image.jpg"
+                  download="hotel-om-garden-social-og-image.jpg"
+                  className="px-3.5 py-2 rounded-xl bg-[#1C130D] hover:bg-[#2A1D14] text-[#FF9933] text-xs font-bold inline-flex items-center gap-1.5 transition-all shadow-xs"
                 >
-                  <Download className="w-4 h-4 text-[#FF9933]" />
-                  HD कार्ड डाउनलोड करा (1200x630)
+                  <Download className="w-3.5 h-3.5 text-[#FF9933]" />
+                  HD कार्ड (1200x630, 86KB)
+                </a>
+                <a
+                  href="/og-image-square.jpg"
+                  download="hotel-om-garden-square-og-image.jpg"
+                  className="px-3.5 py-2 rounded-xl bg-[#0D261F] hover:bg-[#143B30] text-[#FFE0B2] text-xs font-bold inline-flex items-center gap-1.5 transition-all shadow-xs"
+                >
+                  <Download className="w-3.5 h-3.5 text-[#FF9933]" />
+                  स्क्वेअर कार्ड (800x800, 73KB WhatsApp)
                 </a>
                 <button
                   onClick={() => {
-                    const shareText = `🚩 *हॉटेल ओम गार्डन — मांदळी (ता. कर्जत)* 🚩\nअहमदनगर–सोलापूर महामार्गावरील प्रसिद्ध फॅमिली रेस्टॉरंट!\n\n🍲 चविष्ट घरगुती जेवण (चिकन, मटण, भाकरी)\n👨‍👩‍👧‍👦 स्वतंत्र कौटुंबिक बैठक व्यवस्था\n🅿️ मोफत प्रशस्त कार पार्किंग\n🍷 स्वतंत्र परमिट रूम\n\n📞 संपर्क: +91 7744009199 / 9767294601\n🌐 संकेतस्थळ: ${window.location.origin}`;
+                    const shareText = `🚩 *हॉटेल ओम गार्डन — मांदळी (ता. कर्जत)* 🚩\nअहमदनगर–सोलापूर महामार्गावरील प्रसिद्ध फॅमिली रेस्टॉरंट!\n\n🍲 अस्सल गावरान जेवण (चिकन, मटण, भाकरी)\n👨‍👩‍👧‍👦 स्वतंत्र कौटुंबिक बैठक व्यवस्था\n🅿️ मोफत प्रशस्त कार पार्किंग\n🍷 स्वतंत्र परमिट रूम\n\n📞 संपर्क: +91 7744009199 / 9767294601\n🌐 संकेतस्थळ: ${window.location.origin}`;
                     navigator.clipboard.writeText(shareText);
                     alert('WhatsApp साठी तयार असलेला मेसेज कॉपी केला गेला आहे!');
                   }}
-                  className="px-4 py-2 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold inline-flex items-center gap-2 transition-all shadow-xs"
+                  className="px-3.5 py-2 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold inline-flex items-center gap-1.5 transition-all shadow-xs"
                 >
-                  <Copy className="w-4 h-4" />
-                  WhatsApp मेसेज कॉपी करा
+                  <Copy className="w-3.5 h-3.5" />
+                  WhatsApp मेसेज कॉपी
                 </button>
+                <a
+                  href={`https://developers.facebook.com/tools/debug/?q=${encodeURIComponent(window.location.origin)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3.5 py-2 rounded-xl bg-[#1877F2] hover:bg-[#166FE5] text-white text-xs font-bold inline-flex items-center gap-1.5 transition-all shadow-xs"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  Facebook Debugger
+                </a>
               </div>
             </div>
 
-            {/* High-Resolution Live OG Card Preview */}
+            {/* High-Resolution Live OG Card Preview with Safe-Zone Demonstration */}
             <div className="space-y-2">
-              <span className="text-xs font-bold text-[#1C130D] uppercase tracking-wider">
-                पूर्ण आकाराचे अधिकृत कार्ड (1200 × 630 px)
-              </span>
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-[#1C130D] uppercase tracking-wider flex items-center gap-1.5">
+                  <span>१) संपूर्ण लँडस्केप कार्ड (1200 × 630 px • Facebook Desktop & Twitter)</span>
+                  <span className="text-[10px] bg-green-100 text-green-800 px-2 py-0.5 rounded-full font-bold">८६ KB • व्हॉट्सॲप सुसंगत</span>
+                </span>
+              </div>
               <div className="relative rounded-2xl overflow-hidden border-2 border-[#FF9933]/40 shadow-lg bg-[#081713]">
                 <img
-                  src="/og-image.png"
+                  src="/og-image.jpg"
                   alt="हॉटेल ओम गार्डन सोशल मीडिया प्रिव्ह्यू कार्ड"
                   className="w-full h-auto object-cover block"
                   referrerPolicy="no-referrer"
@@ -1370,18 +1391,21 @@ export const AdminPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Platform Simulation Previews */}
+            {/* Platform Simulation Previews: Facebook Responsive & WhatsApp */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-[#EEDCC8]">
               {/* WhatsApp Share Card Simulation */}
               <div className="space-y-2">
-                <div className="flex items-center gap-2 text-xs font-bold text-[#1C130D]">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#25D366]" />
-                  WhatsApp वर असे दिसेल (WhatsApp Share Preview):
+                <div className="flex items-center justify-between text-xs font-bold text-[#1C130D]">
+                  <span className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#25D366]" />
+                    WhatsApp वर असे दिसेल (चॅट प्रिव्ह्यू):
+                  </span>
+                  <span className="text-[10px] text-green-700 font-semibold">८६ KB (३०० KB च्या आत)</span>
                 </div>
-                <div className="bg-[#EFEAE2] p-4 rounded-xl border border-[#D1D7DB] max-w-md">
+                <div className="bg-[#EFEAE2] p-4 rounded-xl border border-[#D1D7DB]">
                   <div className="bg-white rounded-lg overflow-hidden shadow-xs border border-[#E9EDEF]">
                     <img
-                      src="/og-image.png"
+                      src="/og-image.jpg"
                       alt="WhatsApp Preview"
                       className="w-full aspect-[1.91/1] object-cover"
                       referrerPolicy="no-referrer"
@@ -1394,7 +1418,7 @@ export const AdminPage: React.FC = () => {
                         हॉटेल ओम गार्डन | फॅमिली रेस्टॉरंट | मांदळी, कर्जत
                       </h4>
                       <p className="text-xs text-[#667781] line-clamp-2 mt-0.5">
-                        अहमदनगर–सोलापूर महामार्ग, मांदळी येथील अस्सल महाराष्ट्रीयन जेवण, कौटुंबिक बैठक व्यवस्था व संपूर्ण मेनू पाहा.
+                        अहमदनगर–सोलापूर महामार्ग, मांदळी येथील प्रसिद्ध फॅमिली रेस्टॉरंट. अस्सल गावरान चव, स्वतंत्र कुटुंब बैठक व्यवस्था व प्रशस्त पार्किंग.
                       </p>
                     </div>
                   </div>
@@ -1404,51 +1428,55 @@ export const AdminPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Facebook / Twitter / LinkedIn Card Simulation */}
+              {/* Facebook Mobile / Messenger 1:1 Responsive Square Crop Preview */}
               <div className="space-y-2">
-                <div className="flex items-center gap-2 text-xs font-bold text-[#1C130D]">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#1877F2]" />
-                  Facebook / Twitter / Google वर असे दिसेल:
+                <div className="flex items-center justify-between text-xs font-bold text-[#1C130D]">
+                  <span className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#1877F2]" />
+                    Facebook Mobile / Messenger (१:१ स्क्वेअर प्रिव्ह्यू):
+                  </span>
+                  <span className="text-[10px] text-blue-700 font-semibold">सेंटर सेफ-झोन (No Cut-off)</span>
                 </div>
-                <div className="bg-white rounded-xl border border-[#CED0D4] overflow-hidden max-w-md shadow-xs">
-                  <img
-                    src="/og-image.png"
-                    alt="Facebook Card"
-                    className="w-full aspect-[1.91/1] object-cover"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="p-3 bg-[#F0F2F5] border-t border-[#CED0D4]">
-                    <span className="text-[10px] uppercase text-[#65676B] font-semibold tracking-wider">
-                      HOTELOMGARDEN.IN
-                    </span>
-                    <h4 className="font-serif-mr font-bold text-sm text-[#050505] line-clamp-1 mt-0.5">
-                      हॉटेल ओम गार्डन | फॅमिली रेस्टॉरंट | मांदळी, कर्जत
-                    </h4>
-                    <p className="text-xs text-[#65676B] line-clamp-2 mt-0.5">
-                      अहमदनगर–सोलापूर रोड, मांदळी येथील हॉटेल ओम गार्डनची माहिती, खाद्यपदार्थांची यादी, संपर्क क्रमांक आणि मार्गदर्शन पाहा.
-                    </p>
+                <div className="bg-white rounded-xl border border-[#CED0D4] overflow-hidden shadow-xs">
+                  <div className="flex flex-col sm:flex-row items-center">
+                    <img
+                      src="/og-image-square.jpg"
+                      alt="Facebook Square Preview"
+                      className="w-full sm:w-44 sm:h-44 aspect-square object-cover"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="p-3.5 bg-[#F0F2F5] border-t sm:border-t-0 sm:border-l border-[#CED0D4] flex-1">
+                      <span className="text-[10px] uppercase text-[#65676B] font-semibold tracking-wider">
+                        HOTELOMGARDEN.IN
+                      </span>
+                      <h4 className="font-serif-mr font-bold text-sm text-[#050505] line-clamp-2 mt-0.5">
+                        हॉटेल ओम गार्डन | फॅमिली रेस्टॉरंट | मांदळी, कर्जत
+                      </h4>
+                      <p className="text-xs text-[#65676B] line-clamp-2 mt-1">
+                        अहमदनगर–सोलापूर महामार्ग, मांदळी येथील प्रसिद्ध फॅमिली रेस्टॉरंट. अस्सल गावरान चव, सुरक्षित कुटुंब बैठक.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Technical Verification Info */}
-            <div className="p-4 rounded-xl bg-[#FFF9F2] border border-[#EEDCC8] space-y-2">
+            <div className="p-4 rounded-xl bg-[#FFF9F2] border border-[#EEDCC8] space-y-2.5">
               <h4 className="text-xs font-bold text-[#1C130D] flex items-center gap-2">
                 <Check className="w-4 h-4 text-green-700" />
-                तांत्रिक खात्री (Technical Verification):
+                WhatsApp आणि Facebook ओपनग्राफ तांत्रिक तपशील (Technical Verification):
               </h4>
-              <ul className="text-xs text-[#57473D] space-y-1 list-disc list-inside">
-                <li>
-                  <strong>ओपनग्राफ प्रतिमा (OG Image)</strong>: <code>/og-image.png</code> (१२०० × ६३० पिक्सेल, परिपूर्ण १.९१:१ गुणोत्तर).
-                </li>
-                <li>
-                  <strong>वेक्टर बॅकअप (Vector SVG)</strong>: <code>/og-image.svg</code> सर्व आधुनिक ब्राउझर्ससाठी उपलब्ध.
-                </li>
-                <li>
-                  <strong>HTML मेटा टॅग्ज</strong>: <code>index.html</code> मध्ये <code>og:image</code>, <code>og:image:width</code>, <code>twitter:card</code> आणि <code>twitter:image</code> अचूकपणे जोडले गेले आहेत.
-                </li>
-              </ul>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-[#57473D]">
+                <div className="space-y-1">
+                  <span className="font-bold text-[#1C130D] block">✅ WhatsApp सुसंगतता:</span>
+                  <p>WhatsApp क्रॉलरसाठी संपूर्ण HTTPS absolute URL आणि ८६ KB चा ऑप्टिमाइज्ड JPEG पुरवला आहे (WhatsApp ची मर्यादा ३०० KB आहे, त्यामुळे कार्ड तात्काळ लोड होते).</p>
+                </div>
+                <div className="space-y-1">
+                  <span className="font-bold text-[#1C130D] block">✅ Facebook रिस्पॉन्सिव्ह सेफ-झोन:</span>
+                  <p>Facebook च्या १.९१:१ (लँडस्केप) आणि १:१ (मोबाईल स्क्वेअर) या दोन्ही फॉरमॅट्समध्ये सर्व मजकूर, लोगो आणि फोन नंबर मध्यभागी सुरक्षित असल्याने कडांवरून काहीही कापत नाही.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

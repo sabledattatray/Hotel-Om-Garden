@@ -29,6 +29,20 @@ export function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
+  // Ensure social OpenGraph tags and canonical link reflect current live origin
+  useEffect(() => {
+    try {
+      const origin = window.location.origin;
+      const fullUrl = origin + (currentPath.startsWith('/') ? currentPath : `/${currentPath}`);
+      const ogUrl = document.querySelector('meta[property="og:url"]');
+      if (ogUrl) ogUrl.setAttribute('content', fullUrl);
+      const canonical = document.querySelector('link[rel="canonical"]');
+      if (canonical) canonical.setAttribute('href', fullUrl);
+    } catch {
+      // safe no-op
+    }
+  }, [currentPath]);
+
   const navigateTo = (path: string) => {
     setCurrentPath(path);
     window.history.pushState({}, '', path);

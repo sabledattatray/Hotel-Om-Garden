@@ -3,9 +3,25 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import {defineConfig} from 'vite';
 
+import type { Plugin } from 'vite';
+
+const dynamicOgPlugin: Plugin = {
+  name: 'dynamic-og-plugin',
+  transformIndexHtml(html) {
+    const envOrigin = process.env.VITE_APP_URL || process.env.APP_URL;
+    if (envOrigin) {
+      return html.replace(
+        /https:\/\/ais-pre-yt7v5zxzqaoaotxzm4wlhz-402703371058\.asia-southeast1\.run\.app/g,
+        envOrigin.replace(/\/$/, '')
+      );
+    }
+    return html;
+  },
+};
+
 export default defineConfig(() => {
   return {
-    plugins: [react(), tailwindcss()],
+    plugins: [react(), tailwindcss(), dynamicOgPlugin],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
