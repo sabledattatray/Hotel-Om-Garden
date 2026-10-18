@@ -1350,16 +1350,27 @@ export const AdminPage: React.FC = () => {
                   <Download className="w-3.5 h-3.5 text-[#FF9933]" />
                   स्क्वेअर कार्ड (800x800, 73KB WhatsApp)
                 </a>
+                <a
+                  href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
+                    `🚩 *हॉटेल ओम गार्डन — मांदळी (ता. कर्जत)* 🚩\nअहमदनगर–सोलापूर महामार्गावरील प्रसिद्ध फॅमिली रेस्टॉरंट!\n\n🍲 अस्सल गावरान जेवण (चिकन, मटण, भाकरी)\n👨‍👩‍👧‍👦 स्वतंत्र कौटुंबिक बैठक व्यवस्था\n🅿️ मोफत प्रशस्त कार पार्किंग\n🍷 स्वतंत्र परमिट रूम\n\n📞 संपर्क: +91 7744009199 / 9767294601\n🌐 संकेतस्थळ: ${window.location.origin}/?v=1`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3.5 py-2 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold inline-flex items-center gap-1.5 transition-all shadow-xs"
+                >
+                  <Share2 className="w-3.5 h-3.5" />
+                  WhatsApp वर थेट पाठवा
+                </a>
                 <button
                   onClick={() => {
-                    const shareText = `🚩 *हॉटेल ओम गार्डन — मांदळी (ता. कर्जत)* 🚩\nअहमदनगर–सोलापूर महामार्गावरील प्रसिद्ध फॅमिली रेस्टॉरंट!\n\n🍲 अस्सल गावरान जेवण (चिकन, मटण, भाकरी)\n👨‍👩‍👧‍👦 स्वतंत्र कौटुंबिक बैठक व्यवस्था\n🅿️ मोफत प्रशस्त कार पार्किंग\n🍷 स्वतंत्र परमिट रूम\n\n📞 संपर्क: +91 7744009199 / 9767294601\n🌐 संकेतस्थळ: ${window.location.origin}`;
+                    const shareText = `🚩 *हॉटेल ओम गार्डन — मांदळी (ता. कर्जत)* 🚩\nअहमदनगर–सोलापूर महामार्गावरील प्रसिद्ध फॅमिली रेस्टॉरंट!\n\n🍲 अस्सल गावरान जेवण (चिकन, मटण, भाकरी)\n👨‍👩‍👧‍👦 स्वतंत्र कौटुंबिक बैठक व्यवस्था\n🅿️ मोफत प्रशस्त कार पार्किंग\n🍷 स्वतंत्र परमिट रूम\n\n📞 संपर्क: +91 7744009199 / 9767294601\n🌐 संकेतस्थळ: ${window.location.origin}/?v=1`;
                     navigator.clipboard.writeText(shareText);
                     alert('WhatsApp साठी तयार असलेला मेसेज कॉपी केला गेला आहे!');
                   }}
-                  className="px-3.5 py-2 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold inline-flex items-center gap-1.5 transition-all shadow-xs"
+                  className="px-3.5 py-2 rounded-xl bg-[#1C130D] hover:bg-[#2A1D14] text-[#FFE0B2] text-xs font-bold inline-flex items-center gap-1.5 transition-all shadow-xs"
                 >
                   <Copy className="w-3.5 h-3.5" />
-                  WhatsApp मेसेज कॉपी
+                  मेसेज कॉपी करा
                 </button>
                 <a
                   href={`https://developers.facebook.com/tools/debug/?q=${encodeURIComponent(window.location.origin)}`}
