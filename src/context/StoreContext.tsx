@@ -71,7 +71,17 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [settings, setSettings] = useState<SiteSettings>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.SETTINGS);
-      return saved ? JSON.parse(saved) : initialSiteSettings;
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.owner_name_mr === 'श्री. दत्तात्रय साबळे' || !parsed.owner_name_mr) {
+          parsed.owner_name_mr = initialSiteSettings.owner_name_mr;
+        }
+        if (parsed.owner_image_url === '/owner.svg') {
+          parsed.owner_image_url = '/owner.png';
+        }
+        return { ...initialSiteSettings, ...parsed };
+      }
+      return initialSiteSettings;
     } catch {
       return initialSiteSettings;
     }

@@ -1026,6 +1026,175 @@ export const AdminPage: React.FC = () => {
               />
             </div>
 
+            {/* Owner Profile & Photo Adjustment Section */}
+            <div className="pt-4 border-t border-[#EEDCC8] space-y-4">
+              <div className="flex items-center gap-2">
+                <span className="text-base">🚩</span>
+                <h3 className="font-serif-mr text-base font-bold text-[#1C130D]">
+                  हॉटेल मालक व संस्थापक माहिती (Owner Profile & Photo)
+                </h3>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-semibold text-[#1C130D] mb-1">
+                    मालकांचे नाव (Owner Name)
+                  </label>
+                  <input
+                    type="text"
+                    value={settingsForm.owner_name_mr || ''}
+                    onChange={(e) =>
+                      setSettingsForm({ ...settingsForm, owner_name_mr: e.target.value })
+                    }
+                    placeholder="उदा. श्री. शोभाचंद शिंदे"
+                    className="w-full px-3 py-2 text-sm rounded-lg border border-[#EEDCC8]"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-[#1C130D] mb-1">
+                    पद व हुद्दा (Designation / Title)
+                  </label>
+                  <input
+                    type="text"
+                    value={settingsForm.owner_title_mr || ''}
+                    onChange={(e) =>
+                      setSettingsForm({ ...settingsForm, owner_title_mr: e.target.value })
+                    }
+                    placeholder="उदा. संस्थापक व संचालक, हॉटेल ओम गार्डन"
+                    className="w-full px-3 py-2 text-sm rounded-lg border border-[#EEDCC8]"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-[#1C130D] mb-1">
+                  मालकांचा संदेश / ब्रीदवाक्य (Owner Quote / Message)
+                </label>
+                <textarea
+                  rows={2}
+                  value={settingsForm.owner_message_mr || ''}
+                  onChange={(e) =>
+                    setSettingsForm({ ...settingsForm, owner_message_mr: e.target.value })
+                  }
+                  placeholder="आमच्याविषयी पाहुण्यांसाठी मालकांचा खास संदेश..."
+                  className="w-full px-3 py-2 text-sm rounded-lg border border-[#EEDCC8]"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+                <div>
+                  <label className="block text-xs font-semibold text-[#1C130D] mb-1">
+                    मालक फोटो URL / फाईल मार्ग (Owner Photo URL)
+                  </label>
+                  <input
+                    type="text"
+                    value={settingsForm.owner_image_url || ''}
+                    onChange={(e) =>
+                      setSettingsForm({ ...settingsForm, owner_image_url: e.target.value })
+                    }
+                    placeholder="/owner.png किंवा https://..."
+                    className="w-full px-3 py-2 text-sm rounded-lg border border-[#EEDCC8]"
+                  />
+                </div>
+
+                <div className="flex items-center gap-3 pt-4 sm:pt-0">
+                  <div className="w-16 h-20 rounded-lg overflow-hidden border border-[#FF9933] bg-[#120803] shrink-0">
+                    <img
+                      src={settingsForm.owner_image_url || '/owner.png'}
+                      alt="Owner preview"
+                      className="w-full h-full object-cover"
+                      style={{
+                        filter: `brightness(${settingsForm.owner_image_brightness ?? 100}%) contrast(${settingsForm.owner_image_contrast ?? 100}%) saturate(${settingsForm.owner_image_saturation ?? 100}%)`,
+                        transform: `scale(${(settingsForm.owner_image_scale ?? 100) / 100})`,
+                        objectPosition: `center ${settingsForm.owner_image_pos_y ?? 50}%`,
+                      }}
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                  <span className="text-xs text-[#57473D]">
+                    फोटो थेट 'आमच्याविषयी' (About) पृष्ठावर दिसेल. खालील स्लायडर्सने फोटो ॲडजस्ट करू शकता.
+                  </span>
+                </div>
+              </div>
+
+              {/* Photo Adjustment Sliders */}
+              <div className="bg-[#FFF9F2] p-4 rounded-xl border border-[#EEDCC8] space-y-3">
+                <span className="text-xs font-bold text-[#A74600] block">
+                  प्रतिमा दुरुस्ती व ॲडजस्टमेंट (Image Correction Sliders)
+                </span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+                  <div>
+                    <div className="flex justify-between mb-1 text-[11px] font-semibold text-[#1C130D]">
+                      <span>झूम (Scale):</span>
+                      <span className="text-[#A74600]">{settingsForm.owner_image_scale ?? 100}%</span>
+                    </div>
+                    <input
+                      type="range"
+                      min="60"
+                      max="150"
+                      value={settingsForm.owner_image_scale ?? 100}
+                      onChange={(e) =>
+                        setSettingsForm({ ...settingsForm, owner_image_scale: Number(e.target.value) })
+                      }
+                      className="w-full accent-[#FF9933]"
+                    />
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between mb-1 text-[11px] font-semibold text-[#1C130D]">
+                      <span>ब्राईटनेस:</span>
+                      <span className="text-[#A74600]">{settingsForm.owner_image_brightness ?? 100}%</span>
+                    </div>
+                    <input
+                      type="range"
+                      min="70"
+                      max="140"
+                      value={settingsForm.owner_image_brightness ?? 100}
+                      onChange={(e) =>
+                        setSettingsForm({ ...settingsForm, owner_image_brightness: Number(e.target.value) })
+                      }
+                      className="w-full accent-[#FF9933]"
+                    />
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between mb-1 text-[11px] font-semibold text-[#1C130D]">
+                      <span>कॉन्ट्रास्ट:</span>
+                      <span className="text-[#A74600]">{settingsForm.owner_image_contrast ?? 100}%</span>
+                    </div>
+                    <input
+                      type="range"
+                      min="70"
+                      max="140"
+                      value={settingsForm.owner_image_contrast ?? 100}
+                      onChange={(e) =>
+                        setSettingsForm({ ...settingsForm, owner_image_contrast: Number(e.target.value) })
+                      }
+                      className="w-full accent-[#FF9933]"
+                    />
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between mb-1 text-[11px] font-semibold text-[#1C130D]">
+                      <span>सेंटरिंग (Pos Y):</span>
+                      <span className="text-[#A74600]">{settingsForm.owner_image_pos_y ?? 50}%</span>
+                    </div>
+                    <input
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={settingsForm.owner_image_pos_y ?? 50}
+                      onChange={(e) =>
+                        setSettingsForm({ ...settingsForm, owner_image_pos_y: Number(e.target.value) })
+                      }
+                      className="w-full accent-[#FF9933]"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div className="flex flex-wrap items-center gap-6 pt-2">
               <label className="flex items-center gap-2 text-xs text-[#1C130D]">
                 <input

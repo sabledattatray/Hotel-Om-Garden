@@ -30,6 +30,17 @@ export const initialSiteSettings: SiteSettings = {
   announcement_enabled: true,
   disclaimer_mr:
     'खाद्यपदार्थांची उपलब्धता व किंमती बदलू शकतात. कृपया हॉटेलमध्ये किंवा फोनवर खात्री करून घ्या.',
+  // Owner Profile
+  owner_name_mr: 'श्री. शोभाचंद शिंदे',
+  owner_title_mr: 'संस्थापक व संचालक, हॉटेल ओम गार्डन',
+  owner_message_mr:
+    'आमच्याकडे येणाऱ्या प्रत्येक पाहुण्याला घरगुती मायेने, स्वच्छता आणि अस्सल महाराष्ट्रीयन गावरान चवीचे रुचकर भोजन देणे, हेच आमचे कर्तव्य आणि परंपरा आहे. आपल्या कुटुंबासह अथवा मित्रपरिवारासह मांदळी येथून जाताना हॉटेल ओम गार्डनला अवश्य भेट द्या.',
+  owner_image_url: '/owner.png',
+  owner_image_scale: 100,
+  owner_image_brightness: 100,
+  owner_image_contrast: 100,
+  owner_image_saturation: 100,
+  owner_image_pos_y: 50,
 };
 
 export const initialCategories: MenuCategory[] = [

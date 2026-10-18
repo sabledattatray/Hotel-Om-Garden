@@ -89,6 +89,16 @@ export interface SiteSettings {
   active_announcement?: string;
   announcement_enabled: boolean;
   disclaimer_mr: string;
+  // Owner Profile & Image Settings
+  owner_name_mr?: string;
+  owner_title_mr?: string;
+  owner_message_mr?: string;
+  owner_image_url?: string;
+  owner_image_scale?: number; // 50 to 150%
+  owner_image_brightness?: number; // 70 to 130%
+  owner_image_contrast?: number; // 70 to 130%
+  owner_image_saturation?: number; // 70 to 130%
+  owner_image_pos_y?: number; // 0 to 100%
 }
 
 export interface ChecklistItem {

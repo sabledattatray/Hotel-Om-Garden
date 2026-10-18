@@ -24,13 +24,13 @@ export const ShivajiMaharajArtwork: React.FC<ShivajiMaharajArtworkProps> = ({
         >
           <defs>
             <linearGradient id="horseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#FFB366" />
-              <stop offset="50%" stop-color="#FF9933" />
-              <stop offset="100%" stop-color="#B34700" />
+              <stop offset="0%" stopColor="#FFB366" />
+              <stop offset="50%" stopColor="#FF9933" />
+              <stop offset="100%" stopColor="#B34700" />
             </linearGradient>
             <linearGradient id="auraGrad" x1="50%" y1="0%" x2="50%" y2="100%">
-              <stop offset="0%" stop-color="#FF9933" stop-opacity="0.35" />
-              <stop offset="100%" stop-color="#1C130D" stop-opacity="0" />
+              <stop offset="0%" stopColor="#FF9933" stopOpacity="0.35" />
+              <stop offset="100%" stopColor="#1C130D" stopOpacity="0" />
             </linearGradient>
           </defs>
 
