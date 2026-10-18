@@ -1350,20 +1350,37 @@ export const AdminPage: React.FC = () => {
                   <Download className="w-3.5 h-3.5 text-[#FF9933]" />
                   स्क्वेअर कार्ड (800x800, 73KB WhatsApp)
                 </a>
-                <a
-                  href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
-                    `🚩 *हॉटेल ओम गार्डन — मांदळी (ता. कर्जत)* 🚩\nअहमदनगर–सोलापूर महामार्गावरील प्रसिद्ध फॅमिली रेस्टॉरंट!\n\n🍲 अस्सल गावरान जेवण (चिकन, मटण, भाकरी)\n👨‍👩‍👧‍👦 स्वतंत्र कौटुंबिक बैठक व्यवस्था\n🅿️ मोफत प्रशस्त कार पार्किंग\n🍷 स्वतंत्र परमिट रूम\n\n📞 संपर्क: +91 7744009199 / 9767294601\n🌐 संकेतस्थळ: ${window.location.origin}/?v=1`
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-3.5 py-2 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold inline-flex items-center gap-1.5 transition-all shadow-xs"
-                >
-                  <Share2 className="w-3.5 h-3.5" />
-                  WhatsApp वर थेट पाठवा
-                </a>
                 <button
+                  type="button"
+                  onClick={async () => {
+                    const shareText = `🚩 *हॉटेल ओम गार्डन — मांदळी (ता. कर्जत)* 🚩\nअहमदनगर–सोलापूर महामार्गावरील प्रसिद्ध फॅमिली रेस्टॉरंट!\n\n🍲 अस्सल गावरान जेवण (चिकन, मटण, भाकरी)\n👨‍👩‍👧‍👦 स्वतंत्र कौटुंबिक बैठक व्यवस्था\n🅿️ मोफत प्रशस्त कार पार्किंग\n🍷 स्वतंत्र परमिट रूम\n\n📞 संपर्क: +91 7744009199 / 9767294601\n🌐 संकेतस्थळ: ${window.location.origin}\n📷 अधिकृत कार्ड फोटो: https://iili.io/nwF0QSV.jpg`;
+                    try {
+                      const res = await fetch('/og-image.jpg');
+                      const blob = await res.blob();
+                      const file = new File([blob], 'hotel-om-garden-card.jpg', { type: 'image/jpeg' });
+                      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                        await navigator.share({
+                          title: 'हॉटेल ओम गार्डन — मांदळी (कर्जत)',
+                          text: shareText,
+                          files: [file],
+                        });
+                        return;
+                      }
+                    } catch (e) {
+                      console.log('Direct photo share dismissed or unsupported', e);
+                    }
+                    await navigator.clipboard.writeText(shareText);
+                    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
+                  }}
+                  className="px-4 py-2 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold inline-flex items-center gap-1.5 transition-all shadow-md active:scale-95 cursor-pointer"
+                >
+                  <Share2 className="w-4 h-4" />
+                  WhatsApp वर फोटोसहित शेअर करा
+                </button>
+                <button
+                  type="button"
                   onClick={() => {
-                    const shareText = `🚩 *हॉटेल ओम गार्डन — मांदळी (ता. कर्जत)* 🚩\nअहमदनगर–सोलापूर महामार्गावरील प्रसिद्ध फॅमिली रेस्टॉरंट!\n\n🍲 अस्सल गावरान जेवण (चिकन, मटण, भाकरी)\n👨‍👩‍👧‍👦 स्वतंत्र कौटुंबिक बैठक व्यवस्था\n🅿️ मोफत प्रशस्त कार पार्किंग\n🍷 स्वतंत्र परमिट रूम\n\n📞 संपर्क: +91 7744009199 / 9767294601\n🌐 संकेतस्थळ: ${window.location.origin}/?v=1`;
+                    const shareText = `🚩 *हॉटेल ओम गार्डन — मांदळी (ता. कर्जत)* 🚩\nअहमदनगर–सोलापूर महामार्गावरील प्रसिद्ध फॅमिली रेस्टॉरंट!\n\n🍲 अस्सल गावरान जेवण (चिकन, मटण, भाकरी)\n👨‍👩‍👧‍👦 स्वतंत्र कौटुंबिक बैठक व्यवस्था\n🅿️ मोफत प्रशस्त कार पार्किंग\n🍷 स्वतंत्र परमिट रूम\n\n📞 संपर्क: +91 7744009199 / 9767294601\n🌐 संकेतस्थळ: ${window.location.origin}\n📷 अधिकृत कार्ड फोटो: https://iili.io/nwF0QSV.jpg`;
                     navigator.clipboard.writeText(shareText);
                     alert('WhatsApp साठी तयार असलेला मेसेज कॉपी केला गेला आहे!');
                   }}
@@ -1472,21 +1489,36 @@ export const AdminPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Technical Verification Info */}
-            <div className="p-4 rounded-xl bg-[#FFF9F2] border border-[#EEDCC8] space-y-2.5">
+            {/* Technical Verification Info & WhatsApp Testing Note */}
+            <div className="p-5 rounded-xl bg-[#FFF9F2] border border-[#EEDCC8] space-y-3">
               <h4 className="text-xs font-bold text-[#1C130D] flex items-center gap-2">
                 <Check className="w-4 h-4 text-green-700" />
                 WhatsApp आणि Facebook ओपनग्राफ तांत्रिक तपशील (Technical Verification):
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-[#57473D]">
                 <div className="space-y-1">
-                  <span className="font-bold text-[#1C130D] block">✅ WhatsApp सुसंगतता:</span>
-                  <p>WhatsApp क्रॉलरसाठी संपूर्ण HTTPS absolute URL आणि ८६ KB चा ऑप्टिमाइज्ड JPEG पुरवला आहे (WhatsApp ची मर्यादा ३०० KB आहे, त्यामुळे कार्ड तात्काळ लोड होते).</p>
+                  <span className="font-bold text-[#1C130D] block">✅ WhatsApp सुसंगतता व हाय-स्पीड CDN:</span>
+                  <p>WhatsApp क्रॉलरसाठी संपूर्ण HTTPS absolute URL आणि ऑप्टिमाइज्ड JPEG (<a href="https://iili.io/nwF0QSV.jpg" target="_blank" rel="noopener noreferrer" className="text-[#FF9933] underline">इमेज पहा</a>) जोडला आहे.</p>
                 </div>
                 <div className="space-y-1">
                   <span className="font-bold text-[#1C130D] block">✅ Facebook रिस्पॉन्सिव्ह सेफ-झोन:</span>
-                  <p>Facebook च्या १.९१:१ (लँडस्केप) आणि १:१ (मोबाईल स्क्वेअर) या दोन्ही फॉरमॅट्समध्ये सर्व मजकूर, लोगो आणि फोन नंबर मध्यभागी सुरक्षित असल्याने कडांवरून काहीही कापत नाही.</p>
+                  <p>Facebook च्या १.९१:१ आणि मोबाईल १:१ स्क्वेअर फॉरमॅट्समध्ये सर्व मजकूर, लोगो आणि फोन नंबर मध्यभागी सुरक्षित असल्याने कडांवरून काहीही कापत नाही.</p>
                 </div>
+              </div>
+
+              <div className="pt-2 border-t border-[#EEDCC8] text-xs text-[#7A5B3E] space-y-1.5 bg-[#FFF2E0] p-3 rounded-lg">
+                <span className="font-bold text-[#943C00] flex items-center gap-1.5">
+                  💡 WhatsApp वर शेअर करताना फोटो न दिसण्याचे कारण व उपाय:
+                </span>
+                <p>
+                  १) <strong>प्रायव्हेट डेव्हलपमेंट लिंक</strong>: आपण जर <code>ais-dev-*.run.app</code> लिंक थेट WhatsApp वर टाकली, तर त्यावर गुगलचे प्रायव्हेट लॉगिन (Cookie Check) असते. WhatsApp चा ऑटोमॅटिक बॉट गुगल लॉगिन ओलांडू शकत नाही.
+                </p>
+                <p>
+                  २) <strong>थेट उपाय</strong>: वर दिलेल्या <strong>"WhatsApp वर फोटोसहित शेअर करा"</strong> बटनावर क्लिक केल्यास मोबाईलवरून थेट फोटो व संपूर्ण मेसेज एका क्लिकवर पाठवता येतो!
+                </p>
+                <p>
+                  ३) <strong>पब्लिक लिंक</strong>: जेव्हा हे संकेतस्थळ Vercel, Netlify किंवा स्वतःच्या डोमेनवर (उदा. hotelomgarden.in) लाईव्ह केले जाते, तेव्हा गुगल लॉगिन नसते व WhatsApp आपोआप हे कार्ड दाखवते.
+                </p>
               </div>
             </div>
           </div>
