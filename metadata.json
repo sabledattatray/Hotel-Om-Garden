@@ -1,0 +1,6 @@
+{
+  "name": "हॉटेल ओम गार्डन — Hotel Om Garden",
+  "description": "अहमदनगर–सोलापूर रोड, मांदळी येथील हॉटेल ओम गार्डन फॅमिली रेस्टॉरंट व परमिट रूमचे अधिकृत संकेतस्थळ.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
